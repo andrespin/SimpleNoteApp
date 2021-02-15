@@ -12,4 +12,16 @@ public class Note {
         this.description = description;
         this.date = date;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }
