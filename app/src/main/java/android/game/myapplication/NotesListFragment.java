@@ -1,5 +1,6 @@
 package android.game.myapplication;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -24,31 +26,14 @@ public class NotesListFragment extends Fragment {
     private boolean isLandscapeOrientation;
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
-
     public NotesListFragment() {
-        // Required empty public constructor
+
     }
 
-
-    public static NotesListFragment newInstance(String param1, String param2) {
-        NotesListFragment fragment = new NotesListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         isLandscapeOrientation =
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
@@ -67,15 +52,23 @@ public class NotesListFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view;
         for (int i = 0; i < noteList.size(); i++) {
             Note note = noteList.get(i);
-//            String str = String.format(Locale.getDefault(), "%d , %d, %d",
-//                    note.getName(), note.getDescription(), note.getDate());
-            String str = note.getName();
+            String str = String.format(Locale.getDefault(), "%s\n%s\n%s",
+                    note.getName(), note.getDescription(), note.getDate());
             TextView textView = new TextView(linearLayout.getContext());
             textView.setText(str);
             textView.setPadding(padding, 0, padding, 0);
             textView.setTextSize(30f);
-            linearLayout.addView(textView);
+            int index = i;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //       checkOrientation(index);
+                    checkOrientation(note);
 
+
+                }
+            });
+            linearLayout.addView(textView);
         }
     }
 
@@ -85,20 +78,26 @@ public class NotesListFragment extends Fragment {
         noteList.add(new Note("Name3", "Desc3", "11.02.2021"));
     }
 
-    private void checkOrientation(int index) {
+    private void checkOrientation(Note note) {
         if (isLandscapeOrientation) {
-            openEmblemFragment(index);
+            openNoteFragment(note);
         } else {
-            startEmblemActivity(index);
+            startNoteActivity(note);
         }
     }
 
-    private void openEmblemFragment(int index) {
-
+    private void openNoteFragment(Note note) {
+        NoteFragment noteFragment = NoteFragment.newInstance(note);
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.layout_container, noteFragment)
+                .commit();
     }
 
-    private void startEmblemActivity(int index) {
-
+    private void startNoteActivity(Note note) {
+        Intent intent = new Intent(getActivity(), NoteActivity.class);
+        intent.putExtra(NoteFragment.ARG_INDEX, note);
+        startActivity(intent);
     }
 
 

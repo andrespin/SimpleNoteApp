@@ -1,6 +1,8 @@
 package android.game.myapplication;
 
-public class Note {
+import java.io.Serializable;
+
+public class Note implements Serializable {
 
     private final String name;
     private final String description;
