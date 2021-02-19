@@ -1,5 +1,7 @@
-package android.game.myapplication;
+package android.game.myapplication.fragments;
 
+import android.game.myapplication.Note;
+import android.game.myapplication.R;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;

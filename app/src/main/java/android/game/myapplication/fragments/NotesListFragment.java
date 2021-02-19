@@ -1,7 +1,10 @@
-package android.game.myapplication;
+package android.game.myapplication.fragments;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.game.myapplication.Note;
+import android.game.myapplication.R;
+import android.game.myapplication.activities.NoteActivity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,12 +33,20 @@ public class NotesListFragment extends Fragment {
 
     }
 
+    public static NotesListFragment newInstance() {
+        NotesListFragment fragment = new NotesListFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isLandscapeOrientation =
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
     }
 
 
@@ -64,8 +75,6 @@ public class NotesListFragment extends Fragment {
                 public void onClick(View view) {
                     //       checkOrientation(index);
                     checkOrientation(note);
-
-
                 }
             });
             linearLayout.addView(textView);

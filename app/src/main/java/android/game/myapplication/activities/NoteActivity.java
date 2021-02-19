@@ -1,4 +1,4 @@
-package android.game.myapplication;
+package android.game.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.game.myapplication.Note;
+import android.game.myapplication.fragments.NoteFragment;
+import android.game.myapplication.R;
 import android.os.Bundle;
 
 public class NoteActivity extends AppCompatActivity {
@@ -31,7 +34,7 @@ public class NoteActivity extends AppCompatActivity {
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.layout_container, fragment);
+            fragmentTransaction.replace(R.id.layout_container1, fragment);
             fragmentTransaction.commit();
         }
     }
