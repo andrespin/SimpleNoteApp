@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">NotesApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="navigation_drawer_add">Open navigation drawer</string>
+    <string name="navigation_drawer_edit">Close navigation drawer</string>
+    <string name="navigation_drawer_search">Close navigation drawer</string>
+    <string name="navigation_drawer_delete">Close navigation drawer</string>
+
+    <string name="add_note">Добавить</string>
+    <string name="edit_note">Редактировать</string>
+    <string name="search_note">Искать</string>
+    <string name="delete_note">Удалить</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="username">Рекс</string>
+    <string name="userstatus">Люблю гавкать</string>
+
 </resources>
