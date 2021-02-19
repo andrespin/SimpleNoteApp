@@ -1,26 +1,18 @@
 package android.game.myapplication.fragments;
 
-import android.game.myapplication.CutomFrameLayout;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.game.myapplication.R;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
-
-import java.io.Serializable;
 
 
 public class NoteAddFragment extends Fragment {

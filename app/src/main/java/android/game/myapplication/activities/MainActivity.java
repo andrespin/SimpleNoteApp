@@ -10,17 +10,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.game.myapplication.CutomFrameLayout;
 import android.game.myapplication.fragments.NoteAddFragment;
-import android.game.myapplication.fragments.NoteFragment;
+
 import android.game.myapplication.fragments.NotesListFragment;
 import android.game.myapplication.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
+
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -35,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initNotesListFragment(savedInstanceState);
     }
-
 
     private void initNotesListFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
