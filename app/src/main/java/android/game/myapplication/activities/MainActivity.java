@@ -11,13 +11,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.game.myapplication.fragments.NoteAddFragment;
-
 import android.game.myapplication.fragments.NotesListFragment;
 import android.game.myapplication.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
