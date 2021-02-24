@@ -77,29 +77,6 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback 
     }
 
 
-    private void initView1(View view) {
-        int padding = getResources().getDimensionPixelSize(R.dimen.default_margin);
-        LinearLayout linearLayout = (LinearLayout) view;
-        for (int i = 0; i < noteList.size(); i++) {
-            Note note = noteList.get(i);
-            String str = String.format(Locale.getDefault(), "%s\n%s\n%s",
-                    note.getName(), note.getDescription(), note.getDate());
-            TextView textView = new TextView(linearLayout.getContext());
-            textView.setText(str);
-            textView.setPadding(padding, 0, padding, 0);
-            textView.setTextSize(30f);
-            int index = i;
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //       checkOrientation(index);
-                    checkOrientation(note);
-                }
-            });
-            linearLayout.addView(textView);
-        }
-    }
-
     private void initView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerNotes);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
@@ -110,7 +87,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback 
 
     @Override
     public void onOnItemClicked(int position) {
-
+        checkOrientation(noteList.get(position));
     }
 
     private void createNotes() {

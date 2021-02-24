@@ -72,7 +72,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 public void onClick(View view) {
                     if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                         callback.onOnItemClicked(getAdapterPosition());
-
                     }
                 }
             });
