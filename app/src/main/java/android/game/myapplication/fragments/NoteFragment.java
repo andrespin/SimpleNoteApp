@@ -57,6 +57,7 @@ public class NoteFragment extends Fragment {
             Note note = (Note) getArguments().getSerializable(ARG_INDEX);
             String str = String.format(Locale.getDefault(), "Fragment with one note here\n%s\n%s\n%s",
                     note.getName(), note.getDescription(), note.getDate());
+            
             TextView textView = new TextView(frameLayout.getContext());
             textView.setText(str);
             textView.setPadding(padding, 0, padding, 0);

@@ -13,15 +13,21 @@ import androidx.fragment.app.FragmentTransaction;
 import android.game.myapplication.fragments.NoteAddFragment;
 import android.game.myapplication.fragments.NotesListFragment;
 import android.game.myapplication.R;
+import android.game.myapplication.observer.Publisher;
+import android.game.myapplication.observer.PublisherGetter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PublisherGetter {
 
+
+    Publisher publisher = new Publisher();
+    private static boolean isEditFunctionTurned = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void initNotesListFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             NotesListFragment fragment = NotesListFragment.newInstance();
+            publisher.subscribe(fragment);
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -88,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private Boolean switchFunction() {
+        if (isEditFunctionTurned) {
+            isEditFunctionTurned = false;
+        } else {
+            isEditFunctionTurned = true;
+        }
+        return isEditFunctionTurned;
+    }
+
+
     private boolean navigateFragment(int id) {
         switch (id) {
             case R.id.action_add:
@@ -95,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_edit:
                 Toast.makeText(this, "action_edit", Toast.LENGTH_SHORT).show();
+                isEditFunctionTurned = switchFunction();
+                publisher.notify(isEditFunctionTurned);
                 return true;
             case R.id.action_search:
                 Toast.makeText(this, "action_search", Toast.LENGTH_SHORT).show();
@@ -104,11 +123,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
                 Toast.makeText(this, "action_settings", Toast.LENGTH_SHORT).show();
-                System.out.println("action_settings");
                 return true;
             case R.id.action_aboutapp:
                 Toast.makeText(this, "action_aboutapp", Toast.LENGTH_SHORT).show();
-                System.out.println("action_aboutapp");
                 return true;
         }
         return false;
@@ -117,19 +134,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Здесь определяем меню приложения (активити)
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem search = menu.findItem(R.id.action_search); // поиск пункта меню поиска
-        SearchView searchText = (SearchView) search.getActionView(); // строка поиска
+//        CheckBox checkBox = (CheckBox) menu.findItem(R.id.action_edit).getActionView();
+//        checkBox.setChecked(true);
+        MenuItem search = menu.findItem(R.id.action_search);
+        SearchView searchText = (SearchView) search.getActionView();
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            // реагирует на конец ввода поиска
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
                 return true;
             }
 
-            // реагирует на нажатие каждой клавиши
             @Override
             public boolean onQueryTextChange(String newText) {
                 return true;
@@ -146,4 +163,8 @@ public class MainActivity extends AppCompatActivity {
         return toolbar;
     }
 
+    @Override
+    public Publisher getPublisher() {
+        return publisher;
+    }
 }

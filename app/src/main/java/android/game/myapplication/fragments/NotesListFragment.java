@@ -8,6 +8,8 @@ import android.game.myapplication.NotesAdapterCallback;
 import android.game.myapplication.NotesSpaceDecorator;
 import android.game.myapplication.R;
 import android.game.myapplication.activities.NoteActivity;
+import android.game.myapplication.activities.NoteEditActivity;
+import android.game.myapplication.observer.Observer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,22 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
-public class NotesListFragment extends Fragment implements NotesAdapterCallback {
+public class NotesListFragment extends Fragment implements NotesAdapterCallback, Observer {
 
     private List<Note> noteList = new ArrayList<>();
     private boolean isLandscapeOrientation;
 
-    private final NotesAdapter notesAdapter = new NotesAdapter(this);
+    private boolean isEditFunctionTurned = false;
 
+    private final NotesAdapter notesAdapter = new NotesAdapter(this);
 
     public NotesListFragment() {
 
@@ -87,7 +87,11 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback 
 
     @Override
     public void onOnItemClicked(int position) {
-        checkOrientation(noteList.get(position));
+        if (isEditFunctionTurned) {
+            checkOrientationEdit(noteList.get(position));
+        } else {
+            checkOrientation(noteList.get(position));
+        }
     }
 
     private void createNotes() {
@@ -99,12 +103,29 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback 
         noteList.add(new Note("Name6", "Desc6", "18.02.2021"));
     }
 
+
+    private void checkOrientationEdit(Note note) {
+        if (isLandscapeOrientation) {
+            openNoteEditFragment(note);
+        } else {
+            startNoteEditActivity(note);
+        }
+    }
+
     private void checkOrientation(Note note) {
         if (isLandscapeOrientation) {
             openNoteFragment(note);
         } else {
             startNoteActivity(note);
         }
+    }
+
+    private void openNoteEditFragment(Note note) {
+        NoteFragment noteFragment = NoteFragment.newInstance(note);
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.layout_container, noteFragment)
+                .commit();
     }
 
     private void openNoteFragment(Note note) {
@@ -115,11 +136,25 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback 
                 .commit();
     }
 
-    private void startNoteActivity(Note note) {
-        Intent intent = new Intent(getActivity(), NoteActivity.class);
+    private void startNoteEditActivity(Note note) {
+        Intent intent = new Intent(getActivity(), NoteEditActivity.class);
         intent.putExtra(NoteFragment.ARG_INDEX, note);
         startActivity(intent);
     }
 
+    private void startNoteActivity(Note note) {
+        Intent intent = new Intent(getActivity(), NoteActivity.class);
+        intent.putExtra(NoteFragment.ARG_INDEX, note);
+        startActivity(intent);
 
+    }
+
+
+    @Override
+    public void updateBoolean(Boolean isEditFunctionTurned) {
+        this.isEditFunctionTurned = isEditFunctionTurned;
+        if (this.isEditFunctionTurned) {
+            System.out.println("True");
+        }
+    }
 }
