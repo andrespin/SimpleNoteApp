@@ -18,7 +18,6 @@ import android.game.myapplication.observer.PublisherGetter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;

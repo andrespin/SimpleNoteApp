@@ -88,7 +88,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
     @Override
     public void onOnItemClicked(int position) {
         if (isEditFunctionTurned) {
-            checkOrientationEdit(noteList.get(position));
+            startEditActivity(noteList.get(position));
         } else {
             checkOrientation(noteList.get(position));
         }
@@ -104,12 +104,8 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
     }
 
 
-    private void checkOrientationEdit(Note note) {
-        if (isLandscapeOrientation) {
-            openNoteEditFragment(note);
-        } else {
-            startNoteEditActivity(note);
-        }
+    private void startEditActivity(Note note) {
+        startNoteEditActivity(note);
     }
 
     private void checkOrientation(Note note) {
@@ -118,14 +114,6 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
         } else {
             startNoteActivity(note);
         }
-    }
-
-    private void openNoteEditFragment(Note note) {
-        NoteFragment noteFragment = NoteFragment.newInstance(note);
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.layout_container, noteFragment)
-                .commit();
     }
 
     private void openNoteFragment(Note note) {

@@ -12,16 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.game.myapplication.R;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NoteEditFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NoteEditFragment extends Fragment {
 
 
