@@ -16,5 +16,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="username">Рекс</string>
     <string name="userstatus">Люблю гавкать</string>
+    <string name="editMode">Режим редактирования</string>
+    <string name="update">Обновить</string>
+    <string name="delete">Удалить</string>
 
 </resources>

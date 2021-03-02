@@ -19,7 +19,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,7 +38,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
 
     private boolean isEditFunctionTurned = false;
 
-    private final NotesAdapter notesAdapter = new NotesAdapter(this);
+    private final NotesAdapter notesAdapter = new NotesAdapter(this, this);
 
     public NotesListFragment() {
 
@@ -74,6 +77,26 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         notesAdapter.setItems(noteList);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = requireActivity().getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.context_menu_action_update:
+
+                return true;
+            case R.id.context_menu_action_delete:
+
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
 

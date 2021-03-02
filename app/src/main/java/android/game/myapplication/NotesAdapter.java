@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -17,12 +18,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private static final String TAG = "NoteAdapter";
     private final List<Note> notes = new ArrayList<>();
+    private final Fragment fragment;
 
     private final NotesAdapterCallback callback;
 
-    public NotesAdapter(NotesAdapterCallback callback) {
+    public NotesAdapter(NotesAdapterCallback callback, Fragment fragment) {
         this.callback = callback;
+        this.fragment = fragment;
     }
+
 
     @NonNull
     @Override
@@ -59,6 +63,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             textName = itemView.findViewById(R.id.item_name);
             textDescription = itemView.findViewById(R.id.item_description);
             textDate = itemView.findViewById(R.id.item_date);
+            registerContextMenu(itemView);
+        }
+
+        private void registerContextMenu(@NonNull View itemView) {
+            if (fragment != null){
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        itemView.showContextMenu(10, 10);
+                        return false;
+                    }
+                });
+                fragment.registerForContextMenu(itemView);
+            }
         }
 
         public void onBind(Note model, int position) {

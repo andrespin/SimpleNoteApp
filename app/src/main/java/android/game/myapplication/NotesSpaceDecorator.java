@@ -29,6 +29,5 @@ public class NotesSpaceDecorator extends RecyclerView.ItemDecoration {
             outRect.set(defaultSpace, defaultSpace, defaultSpace, defaultSpace);
         }
     }
-
-
+    
 }

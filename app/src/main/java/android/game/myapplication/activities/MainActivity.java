@@ -18,6 +18,8 @@ import android.game.myapplication.observer.PublisherGetter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements PublisherGetter {
 
     Publisher publisher = new Publisher();
     private static boolean isEditFunctionTurned = false;
+    private static CheckBox checkBoxEditMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements PublisherGetter {
 
     private void initNotesListFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
+            checkBoxEditMode.setVisibility(View.VISIBLE);
             NotesListFragment fragment = NotesListFragment.newInstance();
             publisher.subscribe(fragment);
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements PublisherGetter {
     }
 
     private void addNoteAddFragment() {
+        checkBoxEditMode.setVisibility(View.GONE);
         NoteAddFragment fragment = NoteAddFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements PublisherGetter {
     private void initView() {
         Toolbar toolbar = initToolbar();
         initDrawer(toolbar);
+        initCheckBoxEditMode();
     }
 
 
@@ -101,6 +107,17 @@ public class MainActivity extends AppCompatActivity implements PublisherGetter {
             isEditFunctionTurned = true;
         }
         return isEditFunctionTurned;
+    }
+
+    private void initCheckBoxEditMode() {
+       checkBoxEditMode = findViewById(R.id.checkBoxEditMode);
+        checkBoxEditMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isEditFunctionTurned = switchFunction();
+                publisher.notify(isEditFunctionTurned);
+            }
+        });
     }
 
 
