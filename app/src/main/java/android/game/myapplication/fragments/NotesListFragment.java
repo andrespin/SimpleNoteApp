@@ -88,7 +88,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.context_menu_action_update:
 
                 return true;
