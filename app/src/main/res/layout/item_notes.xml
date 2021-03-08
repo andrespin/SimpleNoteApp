@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="150dp"
+    app:cardBackgroundColor="@color/teal_200"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="20sp"
+        tools:text="Длинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имя" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/item_description"
+        android:layout_width="395dp"
+        android:layout_height="94dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:singleLine="false"
+        android:textSize="20sp"
+        tools:text="Длинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имя" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="20sp"
+        tools:text="Длинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имяДлинное имя" />
+
+</com.google.android.material.card.MaterialCardView>
