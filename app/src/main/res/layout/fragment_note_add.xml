@@ -36,20 +36,29 @@
                 android:hint="Описание" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <DatePicker
-            android:id="@+id/editTextDate"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Описание" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp"></Space>
+
 
         <Button
             android:id="@+id/BtnAdd"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Добавить"
-            style="@style/Widget.MaterialComponents.Button.TextButton" />
+            android:text="Добавить" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

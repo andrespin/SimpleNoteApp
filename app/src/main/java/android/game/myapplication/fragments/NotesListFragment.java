@@ -9,6 +9,9 @@ import android.game.myapplication.NotesSpaceDecorator;
 import android.game.myapplication.R;
 import android.game.myapplication.activities.NoteActivity;
 import android.game.myapplication.activities.NoteEditActivity;
+import android.game.myapplication.firebase.notes.NotesFirestoreCallbacks;
+import android.game.myapplication.firebase.notes.NotesRepository;
+import android.game.myapplication.firebase.notes.NotesRepositoryImpl;
 import android.game.myapplication.observer.Observer;
 import android.os.Bundle;
 
@@ -31,7 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NotesListFragment extends Fragment implements NotesAdapterCallback, Observer {
+public class NotesListFragment extends Fragment implements NotesAdapterCallback, Observer,
+        NotesFirestoreCallbacks {
 
     private List<Note> noteList = new ArrayList<>();
     private boolean isLandscapeOrientation;
@@ -39,6 +43,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
     private boolean isEditFunctionTurned = false;
 
     private final NotesAdapter notesAdapter = new NotesAdapter(this, this);
+    private final NotesRepository repository = new NotesRepositoryImpl(this);
 
     public NotesListFragment() {
 
@@ -57,7 +62,7 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
         super.onCreate(savedInstanceState);
         isLandscapeOrientation =
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-        createNotes();
+    //    createNotes();
     }
 
     @Override
@@ -76,7 +81,8 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        notesAdapter.setItems(noteList);
+        repository.requestNotes();
+    //    notesAdapter.setItems(noteList);
     }
 
     @Override
@@ -117,14 +123,14 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
         }
     }
 
-    private void createNotes() {
-        noteList.add(new Note("Name1", "Desc1", "15.02.2021"));
-        noteList.add(new Note("Name2", "Desc2", "13.02.2021"));
-        noteList.add(new Note("Name3", "Desc3", "11.02.2021"));
-        noteList.add(new Note("Name4", "Desc4", "15.02.2021"));
-        noteList.add(new Note("Name5", "Desc5", "17.02.2021"));
-        noteList.add(new Note("Name6", "Desc6", "18.02.2021"));
-    }
+//    private void createNotes() {
+//        noteList.add(new Note("Name1", "Desc1", "15.02.2021"));
+//        noteList.add(new Note("Name2", "Desc2", "13.02.2021"));
+//        noteList.add(new Note("Name3", "Desc3", "11.02.2021"));
+//        noteList.add(new Note("Name4", "Desc4", "15.02.2021"));
+//        noteList.add(new Note("Name5", "Desc5", "17.02.2021"));
+//        noteList.add(new Note("Name6", "Desc6", "18.02.2021"));
+//    }
 
 
     private void startEditActivity(Note note) {
@@ -167,5 +173,17 @@ public class NotesListFragment extends Fragment implements NotesAdapterCallback,
         if (this.isEditFunctionTurned) {
             System.out.println("True");
         }
+    }
+
+    @Override
+    public void onSuccessNotes(@NonNull List<Note> items) {
+        noteList.clear();
+        noteList.addAll(items);
+        notesAdapter.setItems(items);
+    }
+
+    @Override
+    public void onErrorNotes(@Nullable String message) {
+
     }
 }
