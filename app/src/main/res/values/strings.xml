@@ -20,4 +20,15 @@
     <string name="update">Обновить</string>
     <string name="delete">Удалить</string>
 
+    <string name="exclamation">Важное сообщение!</string>
+    <string name="press_button">Нажмите кнопку!</string>
+    <string name="button">КНОПКА</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <string name="deleteAlert">Вы действительно хотите удалить заметку ?</string>
+    <string name="updateAlert">Вы действительно хотите обновить заметку ?</string>
+
+
+
 </resources>
